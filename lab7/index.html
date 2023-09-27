@@ -39,33 +39,54 @@
 
   	<div class="map-overlay top">
   	<div class="map-overlay-inner">
-  	<h2>Public and Affordable Housing Flood Risk</h2>
-    <!-- INSERT TEXT HERE -->
+  	<h2>The Map of Housing Flood Risk and NYCHA development</h2>
+    <!-- Author:Houpu Li Data Source:NYC OpenData -->
+    <p>Author: Houpu Li<br>Data Source: NYC OpenData</p>
   	</div>
   	</div>
 
 <script>
-// You'll be inserting your JS code to initialize your map here
+// You'll be inserting your JS code to initialize your map here:Public Tokens
 mapboxgl.accessToken = 'pk.eyJ1IjoiaGw5MjciLCJhIjoiY2xtd3NuZ3liMHduZDJqbzZmYzRpZXJocSJ9.sdGw0-C3DPzn_-AN_V6Qww'
 // Within a script, you comment using two backslashes.
 
 const map = new mapboxgl.Map({
   container: 'map', // container id
-  style: 'mapbox://styles/hl927/cln23786m06br01p7f3yr9cc9' // replace this with your style URL
+  style: 'mapbox://styles/hl927/cln23786m06br01p7f3yr9cc9' ,// replace this with your style URL(Cali Terrain)
+  center: [-73.935242, 40.730610], // The convention for coordinates is  typically [long, lat]
+  minZoom: 12 // The zoom level can be any decimal number
 });
 
 map.on('load',function(){
-  // Give your layer's source a nickname you'll remember easily. I've called my source `sandy_layer`.
+
+  // Add the NYCHA layer
+  map.addSource('NYCHA_layer',{
+    'type':'vector',
+    'url': 'mapbox://hl927.4mfslbi7' //Tilesets
+  });
+  // add a new layer with your polygons
+  map.addLayer({
+  'id':'borough',
+  'type':'fill',
+  'source':'NYCHA_layer', 
+  'source-layer':'Map_of_NYCHA_Developments-0jwhzg', //Tilesets name
+  'paint':{
+    'fill-color':'#ED944B',
+    'fill-opacity': 0.5
+    }
+  }); 
+
+  // Add the sandy layer
   map.addSource('sandy_layer',{
     'type':'vector',
-    'url': 'mapbox://hl927.9wpwnjxp'
+    'url': 'mapbox://hl927.9wpwnjxp' //Tilesets
   });
   // add a new layer with your polygons
   map.addLayer({
   'id':'flood_zones',
   'type':'fill',
-  'source':'sandy_layer', // 保留这一个
-  'source-layer':'Sandy_Inundation_Zone-9wvno5', // 注意这里是'source-layer'
+  'source':'sandy_layer', 
+  'source-layer':'Sandy_Inundation_Zone-9wvno5', //Tilesets name
   'paint':{
     'fill-color':'#00158f',
     'fill-opacity': 0.5
