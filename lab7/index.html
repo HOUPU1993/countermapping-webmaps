@@ -1,0 +1,81 @@
+<!-- This is to indicate we have an HTML document -->
+<!DOCTYPE html>
+
+<!-- All our code goes within this html tag-->
+<html>
+
+<!-- All the metadata and packages/tools we'll use go in the head.>
+<head>
+
+<!-- The charset attribute specifies the character encoding for the HTML document.-->
+<meta charset="utf-8" />
+
+<!-- The title of your page, which will appear in the browser tab -->
+<title>NYC Housing Flood Risk</title>  
+
+<!-- The size of the viewport vs the rendered page -->
+<meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no" />
+
+<!-- We are going to call the Mapbox GL javascript library, which will allow us to use its functionality -->
+<script src='https://api.mapbox.com/mapbox-gl-js/v2.9.2/mapbox-gl.js'></script>
+
+<!-- Alongside this, we are going to bring in the Mapbox GL stylesheet -->
+<link href='https://api.mapbox.com/mapbox-gl-js/v2.9.2/mapbox-gl.css' rel='stylesheet' />
+
+<!-- You'll be creating this file in a bit -->
+<link href='style.css' rel='stylesheet' />
+
+<!-- This allows us to bring in new fonts -->
+<link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
+</head>
+
+<!-- The body contains the actual content of a page -->
+<body>
+
+<!-- The "div" tag delineates a "division" or section of the HTML page.-->
+  <div id="map">
+  </div>
+
+
+  	<div class="map-overlay top">
+  	<div class="map-overlay-inner">
+  	<h2>Public and Affordable Housing Flood Risk</h2>
+    <!-- INSERT TEXT HERE -->
+  	</div>
+  	</div>
+
+<script>
+// You'll be inserting your JS code to initialize your map here
+mapboxgl.accessToken = 'pk.eyJ1IjoiaGw5MjciLCJhIjoiY2xtd3NuZ3liMHduZDJqbzZmYzRpZXJocSJ9.sdGw0-C3DPzn_-AN_V6Qww'
+// Within a script, you comment using two backslashes.
+
+const map = new mapboxgl.Map({
+  container: 'map', // container id
+  style: 'mapbox://styles/hl927/cln23786m06br01p7f3yr9cc9' // replace this with your style URL
+});
+
+map.on('load',function(){
+  // Give your layer's source a nickname you'll remember easily. I've called my source `sandy_layer`.
+  map.addSource('sandy_layer',{
+    'type':'vector',
+    'url': 'mapbox://hl927.9wpwnjxp'
+  });
+  // add a new layer with your polygons
+  map.addLayer({
+  'id':'flood_zones',
+  'type':'fill',
+  'source':'sandy_layer', // 保留这一个
+  'source-layer':'Sandy_Inundation_Zone-9wvno5', // 注意这里是'source-layer'
+  'paint':{
+    'fill-color':'#00158f',
+    'fill-opacity': 0.5
+    }
+  })
+});
+
+</script>
+
+</body>
+
+</html>
+
