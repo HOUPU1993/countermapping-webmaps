@@ -53,7 +53,7 @@ var config = {
             image: 'images/Image-USA-flood.jpg',
             description: 'The city classifies Red Hook Houses as being in flood zone 1, indicating high flood risk. Before Hurricane Sandy in 2012, various city reports had outlined the need for increased flood protection, projecting floods as high as 5 feet during storm surges. NYCHA officials responded that they did not anticipate storm surges that strong.When Hurricane Sandy struck, the development was inundated with 6 feet (1.8 m) of flood water through sewer overflow and high tides. The storm left residents without power and fresh water for months. This caused leaks, resulting in mold that hurt many residents health.',
             location: {
-                center: [-74.00879, 40.70759],
+                center: [-74.00704, 40.67979],
                 zoom: 15.5,
                 pitch: 60,
                 bearing: -43.2,
